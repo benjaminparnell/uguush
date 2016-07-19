@@ -146,7 +146,7 @@ upload() {
         result="$(echo "${result}" | grep -Eo '"url":"[A-Za-z0-9]+.*",' | sed 's/"url":"//;s/",//')"
         result="$(echo "https://d.maxfile.ro/${result}")"
       elif [ "${usehost}" = 'plateau' ]; then
-        result="$(curl -XPOST -sf -F apiKey=$PLATEAU_API_KEY -F file="@${FILE}" "${upurl}")"
+        result="$(curl -XPOST -sf -H "X-API-KEY: $PLATEAU_API_KEY" -F file="@${FILE}" "${upurl}")"
       fi
       if [ "${useshortener}" = 'waaai' ]; then
         tempresult="$(curl -sf -F url="${result}" "${shorturl}")"
